@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/lib/three.js"></script>
+    <script src="component/sea.js"></script>
+    <script src="component/sky.js"></script>
+    <script src="component/airplane.js"></script>
+    <script src="component/cloud.js"></script>
+    <script src="aviator.js"></script>
+    <title>Document</title>
+    <style>
+        body, html {
+            margin: 0
+        }
+        #world {
+            color: #74197c; 
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(#e4e0ba, #f7d9aa);
+        }
+        #control {
+            position: absolute;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+            <button onclick='swtich()'>SWTICH</button>
+    </div>
+    
+    <div id="world"></div>
+    <script>
+        var run = false;
+        function swtich() {
+            run = !run;
+        }
+    </script>
+</body>
+</html>
