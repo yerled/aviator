@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/lib/three.js"></script>
-    <script src="component/sea.js"></script>
-    <script src="component/sky.js"></script>
-    <script src="component/airplane.js"></script>
-    <script src="component/cloud.js"></script>
-    <script src="aviator.js"></script>
-    <title>Document</title>
+    <script src="src/js/lib/three.js"></script>
+    <script src="src/js/component/sea.js"></script>
+    <script src="src/js/component/sky.js"></script>
+    <script src="src/js/component/airplane.js"></script>
+    <script src="src/js/component/cloud.js"></script>
+    <script src="src/js/contoller/keyboardControlCenter.js"></script>
+    <script src="src/js/aviator.js"></script>
+    <title>Aviator</title>
     <style>
         body, html {
             margin: 0
@@ -28,18 +29,29 @@
             z-index: 2;
         }
     </style>
+    
 </head>
 <body>
     <div id="control">
             <button onclick='swtich()'>SWTICH</button>
     </div>
-    
     <div id="world"></div>
+
+
+
     <script>
-        var run = false;
+        var run = true;
         function swtich() {
             run = !run;
         }
     </script>
+    <script>
+        window.controller = new KeyboardControlCenter();
+        document.onkeydown = function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            var keyCode = e.keyCode;
+            controller.setDerectiveByKeycode(keyCode);
+        };
+  </script>
 </body>
 </html>

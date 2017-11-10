@@ -1,3 +1,14 @@
+ define([
+     'config',
+     'jquery',
+ ], function(config, $) {
+     'use strict';
+     function Sky() {
+
+     }
+
+     var prototype = 
+ });
  // Define a Sky Object
  var Sky = function(){
     // Create an empty container
