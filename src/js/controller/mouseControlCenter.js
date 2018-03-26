@@ -6,7 +6,7 @@ define([
     'use strict';
     function MSCC(airplane, sky, sea, switchOn) {
         ControlCenter.apply(this, arguments);
-        this.
+        
     }
 
     var prototype = {

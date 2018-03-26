@@ -11,7 +11,7 @@ define([
     'use strict';
 
     function Aviator() {
-        
+        this.init();
     }
     
     var prototype = {
@@ -29,16 +29,13 @@ define([
                         ele.mesh ? that.scene.add(ele.mesh) : that.scene.add(ele);
                     });
                 } else {
-                    ele.mesh ? that.scene.add(ele.mesh) : that.scene.add(ele);
+                    e.mesh ? that.scene.add(e.mesh) : that.scene.add(e);
                 }
             });
             
             this.createCamera();
-
             this.createRenderer();
             this.renderer.render(this.scene, this.camera);
-
-            this.loop();
         },
         createScene: function() {
             var scene = new THREE.Scene();
@@ -63,14 +60,15 @@ define([
                 1,
                 10000
             );
-            camera.position.set(-150, 200, 0);
+             camera.position.set(-150, 200, 0);
+            // camera.position.set(0, 100, 200);
             camera.lookAt(0, 120, 0);
             return this.camera = camera;
         },
         createLights: function() {
-            hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9);
-            ambientLight = new THREE.AmbientLight(0xdc8874, .8);
-            shadowLight = new THREE.DirectionalLight(0xffffff, .9);
+            var hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9);
+            var ambientLight = new THREE.AmbientLight(0xdc8874, .8);
+            var shadowLight = new THREE.DirectionalLight(0xffffff, .9);
             
             // Set the direction of the light  
             shadowLight.position.set(0, 350, 200);
@@ -111,30 +109,13 @@ define([
         },
         handleWindowResize: function() {
             // update height and width of the renderer and the camera
-            config.setConfig([
+            config.setConfigs([
                 ['height', window.innerHeight],
                 ['width', window.innerWidth]
             ]);
             this.renderer.setSize(config.width, config.height);
             this.camera.aspect = config.width / config.height;
             this.camera.updateProjectionMatrix();
-        },
-        loop: function() {
-            // call the loop function again
-            requestAnimationFrame(loop);
-        
-            if (!config.pause) {
-                return;
-            };
-        
-            this.airplane.update();
-            this.sky.update();
-            this.sea.update();
-            
-            sky.mesh.rotation.z += .01;
-        
-            // render the scene
-            renderer.render(scene, camera);
         },
     }
 
@@ -164,9 +145,9 @@ function updatePlaneByMouse(){
     airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*0.0128;
     airplane.mesh.rotation.x = (airplane.mesh.position.y-targetY)*0.0064;
 
-    airplane.propeller.rotation.x += 0.3;
+    
 
-    airplane.pilot.updateHairs();
+    
 }
 
 

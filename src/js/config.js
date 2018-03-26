@@ -4,13 +4,13 @@ define([
     'use strict';
     
     function Config() {
-        $.extend(this. this.defaultConfig);
+        $.extend(this, this.defaultConfig);
     }
 
     var prototype = {
-        _defaultConfig: {
+        defaultConfig: {
             pause: false,
-            colors: {
+            Colors: {
                 red:0xf25346,
                 white:0xd8d0d1,
                 brown:0x59332e,
@@ -35,14 +35,15 @@ define([
             this[name] = value;
         },
         setConfigs: function(configArr) {
+            var that = this;
             configArr.forEach(function(config) {
                 if ($.isArray(config)) {
-                    this.setConfig(config[0], config[1])
+                    that.setConfig(config[0], config[1])
                 }
             })
         },
     };
 
     $.extend(Config.prototype, prototype);
-    return Config;
+    return new Config();
 });

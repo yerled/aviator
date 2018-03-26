@@ -1,30 +1,46 @@
 require.config({
-    baseUrl: '/src/js/',
+    //baseUrl: '/src/js/',
     paths: {
-        'three': 'lib/three.min.js',
         'jquery': 'lib/jquery',
-        'utils': 'utils',
-        'config': 'config',
-        'aviator': 'aviator',
+        'utils': 'js/utils',
+        'config': 'js/config',
+        'aviator': 'js/aviator',
         // component
-        'airplane': 'component/airplane',
-        'cloud': 'component/cloud',
-        'pilot': 'component/pilot',
-        'sea': 'component/sea',
-        'sky': 'component/sky',
+        'airplane': 'js/component/airplane',
+        'cloud': 'js/component/cloud',
+        'pilot': 'js/component/pilot',
+        'sea': 'js/component/sea',
+        'sky': 'js/component/sky',
         // controller
-        'controlCenter': 'controller/controlCenter',
-        'kbcc': 'controller/keyboardControlCenter',
-        'mscc': 'controller/mouseControlCenter'
+        'controlCenter': 'js/controller/controlCenter',
+        'kbcc': 'js/controller/keyboardControlCenter',
+        'mscc': 'js/controller/mouseControlCenter'
     }
 });
 
-require(['aviator'], function(Aviator) {
+require(['aviator', 'config'], function(Aviator, config) {
     $(function() {
         var aviator = new Aviator();
-        aviator.init();
         $(window).resize(function() {
             aviator.handleWindowResize();
         });
+        $('#pause').click(function() {
+            config.setConfig('pause', !config.pause);
+        })
+        var loop = function() {
+            // call the loop function again
+            requestAnimationFrame(loop);
+        
+            if (config.pause) {
+                return;
+            };
+        
+            aviator.airplane.update();
+            aviator.sky.update();
+            aviator.sea.update();
+            aviator.airplane.update();
+            aviator.renderer.render(aviator.scene, aviator.camera);
+        };
+        loop();
     });
 });
